@@ -1,0 +1,113 @@
+#ifndef PASSAGER_H
+#define PASSAGER_H
+
+#include <iostream>
+#include <string>
+
+class Passager {
+private:
+    int id;
+    std::string nom;
+    std::string prenom;
+
+public:
+    Passager(int nouvelId, std::string nouveauNom, std::string nouveauPrenom)
+        : id(nouvelId), nom(nouveauNom), prenom(nouveauPrenom) {}
+
+    void afficher() const {
+        std::cout << id << " - " << prenom << " " << nom << std::endl;
+    }
+};
+
+#endif
+
+
+
+
+#ifndef VOL_H
+#define VOL_H
+
+#include <iostream>
+#include <string>
+
+class Vol {
+private:
+    int id;
+    std::string numero;
+    std::string destination;
+    int capacite;
+
+public:
+    Vol(int nouvelId, std::string nouveauNumero,
+        std::string nouvelleDestination, int nouvelleCapacite)
+        : id(nouvelId), numero(nouveauNumero),
+          destination(nouvelleDestination), capacite(nouvelleCapacite) {}
+
+    void afficher() const {
+        std::cout << "Vol " << numero
+                  << " vers " << destination
+                  << " - Capacite: " << capacite << std::endl;
+    }
+};
+
+#endif
+
+
+
+#ifndef RESERVATION_H
+#define RESERVATION_H
+
+#include <iostream>
+
+class Reservation {
+private:
+    int id;
+    int idPassager;
+    int idVol;
+    bool payee;
+
+public:
+    Reservation(int nouvelId, int passager, int vol)
+        : id(nouvelId), idPassager(passager),
+          idVol(vol), payee(false) {}
+
+    void payer() {
+        payee = true;
+    }
+
+    void afficher() const {
+        std::cout << "Reservation " << id
+                  << " - Passager: " << idPassager
+                  << " - Vol: " << idVol
+                  << " - Payee: "
+                  << (payee ? "Oui" : "Non")
+                  << std::endl;
+    }
+};
+
+#endif
+
+
+
+
+
+
+
+#include "Passager.h"
+#include "Vol.h"
+#include "Reservation.h"
+
+int main() {
+    Passager passager(1, "Dupont", "Amina");
+    Vol vol(1, "AF100", "Dakar", 150);
+    Reservation reservation(1, 1, 1);
+
+    passager.afficher();
+    vol.afficher();
+
+    reservation.payer();
+    reservation.afficher();
+
+    return 0;
+}
+
